@@ -1,5 +1,7 @@
 # Deep Learning
 
+> **Hands-on Deep Learning lecture notebooks covering MLP, backpropagation, optimizers, loss functions & regularization — with animated NumPy demos.**
+
 A hands-on classroom notebook covering the fundamentals of Deep Learning — from the transition out of the classic MLP all the way through backpropagation, optimizers, loss functions, and regularization — with runnable NumPy demos and live **animations** designed to be projected and run interactively during a lecture.
 
 ## Contents
