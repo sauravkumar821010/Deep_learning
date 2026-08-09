@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Learning Concepts Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="notebook-badge" href="https://github.com/chandankumarcp/Deep_learning/blob/main/Deep_Learning_Intro_MLP_Backprop.ipynb" target="_blank" rel="noopener noreferrer">
+    📓 View Notebook on GitHub
+  </a>
+
+  <header class="hero" id="top">
+    <nav class="navbar">
+      <a class="brand" href="#top">DL Visualizer</a>
+      <div class="nav-links">
+        <a href="#neuron">Neuron</a>
+        <a href="#mlp">MLP Architecture</a>
+        <a href="#forward">Forward Propagation</a>
+        <a href="#backprop">Backpropagation</a>
+        <a href="#activation">Activation Functions</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <p class="eyebrow">From the notebook to an interactive visual guide</p>
+      <h1>Deep Learning Concepts Visualizer</h1>
+      <p class="hero-text">
+        Explore how neurons, multi-layer perceptrons, forward propagation, backpropagation,
+        and activation functions work together in a deep learning pipeline.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#neuron">Start Exploring</a>
+        <a class="button secondary" href="#activation">See Activation Graphs</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="concept-card" id="neuron">
+      <div class="section-heading">
+        <p class="section-label">Section 1</p>
+        <h2>What is a Neuron?</h2>
+        <p>
+          A neuron combines weighted inputs, adds a bias, and passes the result through
+          an activation function to produce an output.
+        </p>
+      </div>
+
+      <div class="diagram-card">
+        <svg viewBox="0 0 920 300" class="wide-svg" aria-label="Single neuron diagram">
+          <defs>
+            <linearGradient id="signalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#50e3ff"></stop>
+              <stop offset="100%" stop-color="#9b6dff"></stop>
+            </linearGradient>
+          </defs>
+
+          <circle cx="110" cy="70" r="28" class="node pulse-node"></circle>
+          <circle cx="110" cy="150" r="28" class="node pulse-node"></circle>
+          <circle cx="110" cy="230" r="28" class="node pulse-node"></circle>
+          <text x="110" y="77" text-anchor="middle" class="svg-label">x₁</text>
+          <text x="110" y="157" text-anchor="middle" class="svg-label">x₂</text>
+          <text x="110" y="237" text-anchor="middle" class="svg-label">x₃</text>
+
+          <line x1="138" y1="70" x2="335" y2="110" class="signal-line flow-delay-1"></line>
+          <line x1="138" y1="150" x2="335" y2="150" class="signal-line flow-delay-2"></line>
+          <line x1="138" y1="230" x2="335" y2="190" class="signal-line flow-delay-3"></line>
+
+          <text x="235" y="85" class="weight-label">w₁</text>
+          <text x="235" y="144" class="weight-label">w₂</text>
+          <text x="235" y="215" class="weight-label">w₃</text>
+
+          <circle cx="375" cy="150" r="42" class="sum-node"></circle>
+          <text x="375" y="159" text-anchor="middle" class="svg-label large-label">Σ</text>
+
+          <line x1="375" y1="62" x2="375" y2="108" class="bias-line"></line>
+          <circle cx="375" cy="42" r="20" class="bias-node"></circle>
+          <text x="375" y="48" text-anchor="middle" class="svg-label">b</text>
+
+          <line x1="417" y1="150" x2="592" y2="150" class="signal-line flow-delay-4"></line>
+          <rect x="592" y="112" width="160" height="76" rx="18" class="activation-box"></rect>
+          <text x="672" y="145" text-anchor="middle" class="svg-label">Activation</text>
+          <text x="672" y="168" text-anchor="middle" class="svg-subtext">f(z)</text>
+
+          <line x1="752" y1="150" x2="842" y2="150" class="signal-line flow-delay-5"></line>
+          <circle cx="872" cy="150" r="30" class="output-node pulse-node"></circle>
+          <text x="872" y="157" text-anchor="middle" class="svg-label">y</text>
+        </svg>
+      </div>
+
+      <div class="formula-card">
+        <p><strong>Formula:</strong> output = activation(Σ(xᵢ · wᵢ) + b)</p>
+      </div>
+    </section>
+
+    <section class="concept-card" id="mlp">
+      <div class="section-heading">
+        <p class="section-label">Section 2</p>
+        <h2>MLP Architecture</h2>
+        <p>
+          A multi-layer perceptron stacks neurons into layers so the network can learn
+          increasingly rich representations from input to output.
+        </p>
+      </div>
+
+      <div class="diagram-card">
+        <svg viewBox="0 0 980 420" class="wide-svg" aria-label="Multi-layer perceptron diagram">
+          <g class="connection-group">
+            <line x1="128" y1="120" x2="336" y2="90" class="network-line"></line>
+            <line x1="128" y1="120" x2="336" y2="160" class="network-line"></line>
+            <line x1="128" y1="120" x2="336" y2="230" class="network-line"></line>
+            <line x1="128" y1="120" x2="336" y2="300" class="network-line"></line>
+            <line x1="128" y1="210" x2="336" y2="90" class="network-line"></line>
+            <line x1="128" y1="210" x2="336" y2="160" class="network-line"></line>
+            <line x1="128" y1="210" x2="336" y2="230" class="network-line"></line>
+            <line x1="128" y1="210" x2="336" y2="300" class="network-line"></line>
+            <line x1="128" y1="300" x2="336" y2="90" class="network-line"></line>
+            <line x1="128" y1="300" x2="336" y2="160" class="network-line"></line>
+            <line x1="128" y1="300" x2="336" y2="230" class="network-line"></line>
+            <line x1="128" y1="300" x2="336" y2="300" class="network-line"></line>
+
+            <line x1="384" y1="90" x2="596" y2="120" class="network-line"></line>
+            <line x1="384" y1="90" x2="596" y2="210" class="network-line"></line>
+            <line x1="384" y1="90" x2="596" y2="300" class="network-line"></line>
+            <line x1="384" y1="160" x2="596" y2="120" class="network-line"></line>
+            <line x1="384" y1="160" x2="596" y2="210" class="network-line"></line>
+            <line x1="384" y1="160" x2="596" y2="300" class="network-line"></line>
+            <line x1="384" y1="230" x2="596" y2="120" class="network-line"></line>
+            <line x1="384" y1="230" x2="596" y2="210" class="network-line"></line>
+            <line x1="384" y1="230" x2="596" y2="300" class="network-line"></line>
+            <line x1="384" y1="300" x2="596" y2="120" class="network-line"></line>
+            <line x1="384" y1="300" x2="596" y2="210" class="network-line"></line>
+            <line x1="384" y1="300" x2="596" y2="300" class="network-line"></line>
+
+            <line x1="644" y1="120" x2="852" y2="155" class="network-line"></line>
+            <line x1="644" y1="120" x2="852" y2="255" class="network-line"></line>
+            <line x1="644" y1="210" x2="852" y2="155" class="network-line"></line>
+            <line x1="644" y1="210" x2="852" y2="255" class="network-line"></line>
+            <line x1="644" y1="300" x2="852" y2="155" class="network-line"></line>
+            <line x1="644" y1="300" x2="852" y2="255" class="network-line"></line>
+          </g>
+
+          <text x="90" y="45" class="layer-label">Input Layer</text>
+          <text x="286" y="45" class="layer-label">Hidden Layer 1</text>
+          <text x="548" y="45" class="layer-label">Hidden Layer 2</text>
+          <text x="810" y="45" class="layer-label">Output Layer</text>
+
+          <g class="layer highlight-cycle-1">
+            <circle cx="90" cy="120" r="38" class="node pulse-node"></circle>
+            <circle cx="90" cy="210" r="38" class="node pulse-node"></circle>
+            <circle cx="90" cy="300" r="38" class="node pulse-node"></circle>
+          </g>
+          <g class="layer highlight-cycle-2">
+            <circle cx="346" cy="90" r="38" class="node pulse-node"></circle>
+            <circle cx="346" cy="160" r="38" class="node pulse-node"></circle>
+            <circle cx="346" cy="230" r="38" class="node pulse-node"></circle>
+            <circle cx="346" cy="300" r="38" class="node pulse-node"></circle>
+          </g>
+          <g class="layer highlight-cycle-3">
+            <circle cx="606" cy="120" r="38" class="node pulse-node"></circle>
+            <circle cx="606" cy="210" r="38" class="node pulse-node"></circle>
+            <circle cx="606" cy="300" r="38" class="node pulse-node"></circle>
+          </g>
+          <g class="layer highlight-cycle-4">
+            <circle cx="862" cy="155" r="38" class="output-node pulse-node"></circle>
+            <circle cx="862" cy="255" r="38" class="output-node pulse-node"></circle>
+          </g>
+
+          <text x="90" y="127" text-anchor="middle" class="svg-label">x₁</text>
+          <text x="90" y="217" text-anchor="middle" class="svg-label">x₂</text>
+          <text x="90" y="307" text-anchor="middle" class="svg-label">x₃</text>
+          <text x="346" y="97" text-anchor="middle" class="svg-label">h₁</text>
+          <text x="346" y="167" text-anchor="middle" class="svg-label">h₂</text>
+          <text x="346" y="237" text-anchor="middle" class="svg-label">h₃</text>
+          <text x="346" y="307" text-anchor="middle" class="svg-label">h₄</text>
+          <text x="606" y="127" text-anchor="middle" class="svg-label">g₁</text>
+          <text x="606" y="217" text-anchor="middle" class="svg-label">g₂</text>
+          <text x="606" y="307" text-anchor="middle" class="svg-label">g₃</text>
+          <text x="862" y="162" text-anchor="middle" class="svg-label">o₁</text>
+          <text x="862" y="262" text-anchor="middle" class="svg-label">o₂</text>
+        </svg>
+      </div>
+    </section>
+
+    <section class="concept-card" id="forward">
+      <div class="section-heading">
+        <p class="section-label">Section 3</p>
+        <h2>Forward Propagation</h2>
+        <p>
+          During the forward pass, features move from left to right. Each layer computes
+          a weighted sum and activation before handing the signal to the next layer.
+        </p>
+      </div>
+
+      <div class="prop-grid">
+        <div class="flow-card">
+          <div class="flow-layers">
+            <div class="flow-stage stage-1">
+              <span>Input</span>
+              <small>X</small>
+            </div>
+            <div class="flow-arrow arrow-forward">→</div>
+            <div class="flow-stage stage-2">
+              <span>Linear</span>
+              <small>Z = W·X + b</small>
+            </div>
+            <div class="flow-arrow arrow-forward">→</div>
+            <div class="flow-stage stage-3">
+              <span>Activation</span>
+              <small>A = f(Z)</small>
+            </div>
+            <div class="flow-arrow arrow-forward">→</div>
+            <div class="flow-stage stage-4">
+              <span>Prediction</span>
+              <small>ŷ</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="equation-stack">
+          <div class="mini-card">
+            <h3>Step 1</h3>
+            <p>Combine inputs and learned parameters with matrix multiplication.</p>
+            <code>Z = W · X + b</code>
+          </div>
+          <div class="mini-card">
+            <h3>Step 2</h3>
+            <p>Apply a non-linear transformation so the network can learn complex patterns.</p>
+            <code>A = activation(Z)</code>
+          </div>
+          <div class="mini-card">
+            <h3>Step 3</h3>
+            <p>Repeat the process layer by layer until the final output is produced.</p>
+            <code>X → Hidden → Hidden → Output</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept-card" id="backprop">
+      <div class="section-heading">
+        <p class="section-label">Section 4</p>
+        <h2>Backpropagation</h2>
+        <p>
+          Backpropagation moves from right to left, measuring error and using the chain
+          rule to compute how each weight contributed to the loss.
+        </p>
+      </div>
+
+      <div class="prop-grid">
+        <div class="flow-card reverse-card">
+          <div class="flow-layers reverse-flow">
+            <div class="flow-stage stage-4 reverse-stage">
+              <span>Loss</span>
+              <small>L(ŷ, y)</small>
+            </div>
+            <div class="flow-arrow arrow-backward">←</div>
+            <div class="flow-stage stage-3 reverse-stage">
+              <span>Output Gradients</span>
+              <small>∂L/∂A</small>
+            </div>
+            <div class="flow-arrow arrow-backward">←</div>
+            <div class="flow-stage stage-2 reverse-stage">
+              <span>Chain Rule</span>
+              <small>∂L/∂Z · ∂Z/∂W</small>
+            </div>
+            <div class="flow-arrow arrow-backward">←</div>
+            <div class="flow-stage stage-1 reverse-stage">
+              <span>Update Weights</span>
+              <small>W = W - α·∂L/∂W</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="equation-stack">
+          <div class="mini-card">
+            <h3>Loss</h3>
+            <p>Measure how far predictions are from the target.</p>
+            <code>MSE = (1/n) Σ(y - ŷ)²</code>
+          </div>
+          <div class="mini-card">
+            <h3>Gradient</h3>
+            <p>Propagate sensitivity backward to learn the slope for each parameter.</p>
+            <code>∂L/∂W = ∂L/∂A · ∂A/∂Z · ∂Z/∂W</code>
+          </div>
+          <div class="mini-card">
+            <h3>Learning Rule</h3>
+            <p>Use the gradient and learning rate α to reduce loss over time.</p>
+            <code>W = W - α · ∂L/∂W</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept-card" id="activation">
+      <div class="section-heading">
+        <p class="section-label">Section 5</p>
+        <h2>Activation Functions</h2>
+        <p>
+          Activation functions shape the signal passing through a network and determine
+          what kind of behavior each layer can express.
+        </p>
+      </div>
+
+      <div class="activation-grid">
+        <article class="activation-card">
+          <h3>Sigmoid</h3>
+          <p class="activation-formula">σ(x) = 1 / (1 + e<sup>-x</sup>)</p>
+          <svg viewBox="0 0 220 160" class="graph-svg" aria-label="Sigmoid graph">
+            <line x1="20" y1="80" x2="200" y2="80" class="axis"></line>
+            <line x1="110" y1="15" x2="110" y2="145" class="axis"></line>
+            <path d="M35 122 C60 122, 76 108, 94 92 S130 38, 185 38" class="graph-line"></path>
+          </svg>
+          <p class="use-case">Use case: binary output probabilities and classic hidden layers.</p>
+        </article>
+
+        <article class="activation-card">
+          <h3>ReLU</h3>
+          <p class="activation-formula">ReLU(x) = max(0, x)</p>
+          <svg viewBox="0 0 220 160" class="graph-svg" aria-label="ReLU graph">
+            <line x1="20" y1="80" x2="200" y2="80" class="axis"></line>
+            <line x1="110" y1="15" x2="110" y2="145" class="axis"></line>
+            <path d="M35 125 L110 80 L190 20" class="graph-line"></path>
+          </svg>
+          <p class="use-case">Use case: deep hidden layers because it is simple and efficient.</p>
+        </article>
+
+        <article class="activation-card">
+          <h3>Tanh</h3>
+          <p class="activation-formula">tanh(x) = (e<sup>x</sup> - e<sup>-x</sup>) / (e<sup>x</sup> + e<sup>-x</sup>)</p>
+          <svg viewBox="0 0 220 160" class="graph-svg" aria-label="Tanh graph">
+            <line x1="20" y1="80" x2="200" y2="80" class="axis"></line>
+            <line x1="110" y1="15" x2="110" y2="145" class="axis"></line>
+            <path d="M35 125 C60 125, 76 118, 94 97 S125 30, 185 28" class="graph-line"></path>
+          </svg>
+          <p class="use-case">Use case: centered hidden activations with outputs in [-1, 1].</p>
+        </article>
+
+        <article class="activation-card">
+          <h3>Softmax</h3>
+          <p class="activation-formula">softmax(zᵢ) = e<sup>zᵢ</sup> / Σe<sup>zⱼ</sup></p>
+          <svg viewBox="0 0 220 160" class="graph-svg" aria-label="Softmax graph">
+            <line x1="20" y1="135" x2="200" y2="135" class="axis"></line>
+            <line x1="25" y1="20" x2="25" y2="140" class="axis"></line>
+            <path d="M45 120 C70 112, 92 92, 110 52 S155 32, 185 42" class="graph-line"></path>
+          </svg>
+          <p class="use-case">Use case: multi-class classification probabilities across output neurons.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      Built for the
+      <a href="https://github.com/chandankumarcp/Deep_learning" target="_blank" rel="noopener noreferrer">chandankumarcp/Deep_learning</a>
+      repository.
+    </p>
+  </footer>
+</body>
+</html>
