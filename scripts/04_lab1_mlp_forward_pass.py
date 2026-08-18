@@ -7,7 +7,6 @@ both MSE and Cross-Entropy losses, so students can compare the numbers directly.
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
